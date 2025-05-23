@@ -12,7 +12,7 @@
             DriveInfo selectedDrive = (DriveInfo)driveSelection.Items[driveSelection.SelectedIndex];
             //if (selectedDrive != null && Directory.Exists(selectedDrive + @"PSP\") && Directory.Exists(selectedDrive + @"ISO\"))
             //{
-            Program.SetPSP(this, selectedDrive + @"PSP\", selectedDrive + @"ISO\");
+            PSPTools.SetPSP(this, selectedDrive + @"PSP\", selectedDrive + @"ISO\");
             //}
         }
 
@@ -59,7 +59,7 @@
 
         private void byFolderSelect_Click(object sender, EventArgs e)
         {
-            Program.SetPSP(this, pspFolderPath.Text, this.isoFolderPath.Text);
+            PSPTools.SetPSP(this, pspFolderPath.Text, this.isoFolderPath.Text);
         }
     }
 }

@@ -3,7 +3,7 @@ using Ini.Net;
 
 namespace PSP_Tools_2
 {
-    internal static class Program
+    internal static class PSPTools
     {
         public static Boolean PSPSelected = false;
         public static String PSPFolder;
@@ -11,6 +11,7 @@ namespace PSP_Tools_2
 
         public static Form MainForm = new MainForm();
         public static String SaveFileLocation = AppDomain.CurrentDomain.BaseDirectory;
+        public static String FileRes = AppDomain.CurrentDomain.BaseDirectory + @"\FileResources\";
         public static void ShowModal(Form form)
         {
             form.ShowDialog(MainForm);
@@ -25,7 +26,11 @@ namespace PSP_Tools_2
 
         public static SFOReader ReadSFO(String file)
         {
-
+            if (!File.Exists(file))
+            {
+                MessageBox.Show("Corrupted Save File, skipping.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return new SFOReader(FileRes + @"\corrupt.sfo");
+            }
             return new SFOReader(file);
 
         }
@@ -36,6 +41,18 @@ namespace PSP_Tools_2
             Debug.WriteLine(isoFolder);
             if (Directory.Exists(pspfolder) && Directory.Exists(isoFolder))
             {
+                if (!Directory.Exists(pspfolder + @"\SAVEDATA\"))
+                {
+                    var resp = MessageBox.Show(form, "No SAVEDATA Folder! Make one?", "Selection Success", MessageBoxButtons.YesNo);
+                    if (resp == DialogResult.Yes)
+                    {
+                        Directory.CreateDirectory(pspfolder + @"\SAVEDATA\");
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
                 PSPFolder = pspfolder;
                 ISOFolder = isoFolder;
                 PSPSelected = true;
@@ -61,7 +78,7 @@ namespace PSP_Tools_2
 
             if (!File.Exists(SaveFileLocation + "settings.ini"))
             {
-                Program.ShowModal(new PSPSelectionForm());
+                PSP_Tools_2.PSPTools.ShowModal(new PSPSelectionForm());
             }
             else
             {
@@ -76,7 +93,7 @@ namespace PSP_Tools_2
                 {
                     Debug.WriteLine(PSPFolder);
                     Debug.WriteLine(ISOFolder);
-                    if (MessageBox.Show(MainForm, "PSP not connected/moved drives. Reselect?", "PSP Moved", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes) Program.ShowModal(new PSPSelectionForm());
+                    if (MessageBox.Show(MainForm, "PSP not connected/moved drives. Reselect?", "PSP Moved", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes) PSP_Tools_2.PSPTools.ShowModal(new PSPSelectionForm());
                 }
             }
             if (!Directory.Exists(SaveFileLocation + @"backups\")) Directory.CreateDirectory(SaveFileLocation + @"backups\");

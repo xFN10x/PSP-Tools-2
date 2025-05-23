@@ -60,7 +60,7 @@ namespace PSP_Tools_2
             var bytes = File.ReadAllBytes(file);
 
             // Read Header
-            MAGIC = System.Text.Encoding.UTF8.GetString(Program.SubArray<byte>(bytes, 0, 4));
+            MAGIC = System.Text.Encoding.UTF8.GetString(PSPTools.SubArray<byte>(bytes, 0, 4));
             VERSION = "1.01";
             KEY_TABLE_OFFSET = BitConverter.ToUInt32(bytes, 8);
             DATA_TABLE_OFFSET = BitConverter.ToUInt32(bytes, 12);
@@ -77,7 +77,7 @@ namespace PSP_Tools_2
             {
                 var index = new SfoIndexEntry(
                     BitConverter.ToUInt16(bytes, 20 + keyOff),
-                    Program.SubArray<byte>(bytes, 22 + keyOff, 2),
+                    PSPTools.SubArray<byte>(bytes, 22 + keyOff, 2),
                     BitConverter.ToUInt32(bytes, 24 + keyOff),
                     BitConverter.ToUInt32(bytes, 28 + keyOff),
                     BitConverter.ToUInt32(bytes, 32 + keyOff)
@@ -96,7 +96,7 @@ namespace PSP_Tools_2
                 // Get the Key name
                 if (i + 1 >= 0 && i + 1 < INDEXS.Count)
                 {
-                    key = System.Text.Encoding.UTF8.GetString(Program.SubArray<byte>(
+                    key = System.Text.Encoding.UTF8.GetString(PSPTools.SubArray<byte>(
                     bytes,
                     Convert.ToInt32(KEY_TABLE_OFFSET + item.KeyOffset),
                     INDEXS[i + 1].KeyOffset - item.KeyOffset));
@@ -104,7 +104,7 @@ namespace PSP_Tools_2
                 else if (i < INDEXS.Count)
                 {
                     Debug.WriteLine(Convert.ToInt32(DATA_TABLE_OFFSET));
-                    key = System.Text.Encoding.UTF8.GetString(Program.SubArray<byte>(
+                    key = System.Text.Encoding.UTF8.GetString(PSPTools.SubArray<byte>(
                     bytes,
                     Convert.ToInt32(KEY_TABLE_OFFSET + item.KeyOffset),
                     Convert.ToInt32(DATA_TABLE_OFFSET - (KEY_TABLE_OFFSET + item.KeyOffset))));
@@ -112,7 +112,7 @@ namespace PSP_Tools_2
                 else key = "ERROR!";
 
                 // Get the data bytes
-                var data = Program.SubArray<byte>(bytes,
+                var data = PSPTools.SubArray<byte>(bytes,
                     Convert.ToInt32(DATA_TABLE_OFFSET + item.DataOffset),
                     Convert.ToInt32(item.DataMaxLength)
                     );

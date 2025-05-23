@@ -58,12 +58,14 @@
             // 
             backupCheck.AutoSize = true;
             backupCheck.BackColor = Color.Transparent;
+            backupCheck.Checked = true;
+            backupCheck.CheckState = CheckState.Checked;
             backupCheck.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             backupCheck.Location = new Point(12, 61);
             backupCheck.Name = "backupCheck";
             backupCheck.Size = new Size(222, 24);
             backupCheck.TabIndex = 2;
-            backupCheck.Text = "Create Backup for Restoring";
+            backupCheck.Text = "&Create Backup for Restoring";
             backupCheck.UseVisualStyleBackColor = false;
             backupCheck.CheckedChanged += checkBox1_CheckedChanged;
             // 
