@@ -63,11 +63,11 @@ namespace PSP_Tools_2
             taskForm.IClose();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private async void button2_Click(object sender, EventArgs e)
         {
             var taskForm = new taskForm("Loading...", true);
             taskForm.Show();
-            Task.Delay(1000);
+            await Task.Delay(2000);
 
             var form = new VideoConvertForm();
 

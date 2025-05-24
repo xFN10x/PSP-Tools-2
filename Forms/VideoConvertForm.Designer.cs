@@ -42,6 +42,7 @@ namespace PSP_Tools_2.Forms
             folderSelectedBox = new TextBox();
             selectOutputFolderButton = new Button();
             outputFolderBrowserDialog = new FolderBrowserDialog();
+            ConvertVideos = new Button();
             ((System.ComponentModel.ISupportInitialize)inputVideoView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
@@ -149,6 +150,7 @@ namespace PSP_Tools_2.Forms
             // 
             // folderSelectedBox
             // 
+            folderSelectedBox.Enabled = false;
             folderSelectedBox.Location = new Point(504, 87);
             folderSelectedBox.Name = "folderSelectedBox";
             folderSelectedBox.Size = new Size(234, 27);
@@ -157,6 +159,7 @@ namespace PSP_Tools_2.Forms
             // 
             // selectOutputFolderButton
             // 
+            selectOutputFolderButton.Enabled = false;
             selectOutputFolderButton.Location = new Point(744, 87);
             selectOutputFolderButton.Name = "selectOutputFolderButton";
             selectOutputFolderButton.Size = new Size(27, 27);
@@ -169,11 +172,23 @@ namespace PSP_Tools_2.Forms
             outputFolderBrowserDialog.Description = "Open Output Folder";
             outputFolderBrowserDialog.SelectedPath = "%HOMEPATH%";
             // 
+            // ConvertVideos
+            // 
+            ConvertVideos.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            ConvertVideos.Location = new Point(504, 171);
+            ConvertVideos.Name = "ConvertVideos";
+            ConvertVideos.Size = new Size(267, 29);
+            ConvertVideos.TabIndex = 11;
+            ConvertVideos.Text = "&Convert";
+            ConvertVideos.UseVisualStyleBackColor = true;
+            ConvertVideos.Click += ConvertVideos_Click;
+            // 
             // VideoConvertForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 432);
+            Controls.Add(ConvertVideos);
             Controls.Add(selectOutputFolderButton);
             Controls.Add(folderSelectedBox);
             Controls.Add(outputMode);
@@ -194,7 +209,7 @@ namespace PSP_Tools_2.Forms
             PerformLayout();
         }
 
-        
+
 
 
         #endregion
@@ -212,5 +227,6 @@ namespace PSP_Tools_2.Forms
         private TextBox folderSelectedBox;
         private Button selectOutputFolderButton;
         private FolderBrowserDialog outputFolderBrowserDialog;
+        private Button ConvertVideos;
     }
 }

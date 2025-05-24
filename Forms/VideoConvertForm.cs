@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using FFmpeg.NET;
 
 namespace PSP_Tools_2.Forms
 {
@@ -136,6 +137,16 @@ namespace PSP_Tools_2.Forms
             {
                 folderSelectedBox.Enabled = true;
                 selectOutputFolderButton.Enabled = true;
+            }
+        }
+
+        private void ConvertVideos_Click(object sender, EventArgs e)
+        {
+            var ffmpeg = new Engine(PSPTools.FileRes + @"\programs\");
+
+            foreach (var item in files)
+            {
+
             }
         }
     }
